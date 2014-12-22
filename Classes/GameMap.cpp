@@ -31,12 +31,12 @@ bool GameMap::init()
 
 	this->addChild(_tileMap);
 
-	auto unit = new GameUnit();
-
-	unit->setXY(2, 1);
-	this->addChild(unit->getSprite());
-	unit->setXY(1, 1);
 	dealWithTouch();
+
+	gameStatus = new GameStatus(this);
+
+	this->scheduleUpdate();
+	
 	return true;
 }
 
@@ -67,15 +67,47 @@ void GameMap::dealWithTouch()
 	listener->onTouchEnded = [&](Touch* touch, Event* event)
 	{
 		Point point = Director::getInstance()->convertToGL(touch->getPreviousLocationInView());
-		point = GameHelper::ScreenToScreen(point);
+		point = GameHelper::SrceenToMap(point);
+
+		GameUnit* t = getUnitByXY(point.x, point.y);
+		if (t != nullptr)
+		{
+			//delete currentUnit;
+			//count--;
+			gameStatus->setCount(count);
+			currentUnit = t;
+			//gameStatus->showUnit(currentUnit);
+			return;
+		}
 		
-		auto sd = new GameUnit();
-		sd->getSprite()->setPosition(point.x, point.y);
-		this->addChild(sd->getSprite());
+		auto sd = new GameUnit(this);
+		currentUnit = sd;
+		units.push_back(sd);
+		sd->setXY(point.x, point.y);
+		
 		CCLOG("dd");
+		count++;
+		gameStatus->setCount(count);
 	};
 
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, _tileMap);
+}
+
+GameUnit* GameMap::getUnitByXY(int x, int y)
+{
+	for each (GameUnit* var in units)
+	{
+		if (Point(x, y) == var->getXY())
+		{
+			return var;
+		}		
+	}
+	return nullptr;
+}
+
+void GameMap::update(float delta)
+{
+	gameStatus->showUnit(currentUnit);
 }
 

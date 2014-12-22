@@ -39,7 +39,7 @@ bool MainMenu::init()
 
 cocos2d::ui::Widget::ccWidgetClickCallback MainMenu::onLocateClickCallback(const std::string &callBackName)
 {
-	log(("fff"+callBackName).c_str());
+
 	if (callBackName == "quit")
 	{
 		return CC_CALLBACK_1(MainMenu::onClick, this);

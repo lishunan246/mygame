@@ -2,6 +2,9 @@
 #include "cocos2d.h"
 #include "GameUnit.h"
 #include "GameHelper.h"
+#include "GameStatus.h"
+
+using namespace std;
 class GameMap : public cocos2d::Layer
 {
 public:
@@ -18,8 +21,14 @@ public:
 	CREATE_FUNC(GameMap);
 
 	void dealWithTouch();
+	GameUnit* getUnitByXY(int x, int y);
+	virtual void update(float delta);
+
 private:
-	TMXTiledMap* _tileMap;
-	
+	TMXTiledMap* _tileMap=nullptr;
+	GameStatus* gameStatus=nullptr;
+	int count = 0;
+	std::vector<GameUnit*> units;
+	GameUnit* currentUnit=nullptr;
 };
 
