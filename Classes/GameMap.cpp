@@ -28,6 +28,8 @@ bool GameMap::init()
 	}
 
 	_tileMap = TMXTiledMap::create("map.tmx");
+	ground = _tileMap->getLayer("ground");
+	assert(ground != nullptr);
 
 	this->addChild(_tileMap);
 
@@ -68,7 +70,15 @@ void GameMap::dealWithTouch()
 	{
 		Point point = Director::getInstance()->convertToGL(touch->getPreviousLocationInView());
 		point = GameHelper::SrceenToMap(point);
-
+		int id = ground->getTileGIDAt(point);
+		string terrain = "";
+		if (id != 0)
+		{
+			Value property = _tileMap->getPropertiesForGID(id);
+			Value p = property.asValueMap().at("type");
+			terrain = p.asString();
+		}
+		gameStatus->showTerrain(terrain);
 		GameUnit* t = getUnitByXY(point.x, point.y);
 		if (t != nullptr)
 		{

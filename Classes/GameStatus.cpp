@@ -29,6 +29,10 @@ GameStatus::GameStatus(Node* node)
 	hp = Label::createWithTTF("HP", font, size);
 	hp->setPosition(1600, 1000);
 	node->addChild(hp, 1);
+
+	terrain = Label::createWithTTF("terrain", font, size);
+	terrain->setPosition(1400, 1000);
+	node->addChild(terrain, 1);
 }
 
 
@@ -55,4 +59,9 @@ void GameStatus::showUnit(GameUnit* unit)
 	hp->setString(to_string(unit->hp));
 	positionX->setString(to_string(unit->x));
 	positionY->setString(to_string(unit->y));
+}
+
+void GameStatus::showTerrain(string s)
+{
+	terrain->setString(s);
 }

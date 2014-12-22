@@ -10,10 +10,11 @@ public:
 	~GameStatus();
 	void setCount(int count);
 	void showUnit(GameUnit* unit);
+	void showTerrain(string s);
 private:
 	Node* node;
 	std::string font = "fonts/Marker Felt.ttf";
 	int size = 40;
-	Label* label,*positionX,*positionY,*name,*hp;
+	Label* label,*positionX,*positionY,*name,*hp,*terrain;
 };
 

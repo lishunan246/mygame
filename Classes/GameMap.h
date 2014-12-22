@@ -26,6 +26,7 @@ public:
 
 private:
 	TMXTiledMap* _tileMap=nullptr;
+	TMXLayer* ground=nullptr;
 	GameStatus* gameStatus=nullptr;
 	int count = 0;
 	std::vector<GameUnit*> units;
