@@ -95,7 +95,10 @@ void GameMap::dealWithTouch()
 	{
 		Point point = Director::getInstance()->convertToGL(touch->getPreviousLocationInView());
 		point = GameHelper::SrceenToMap(point);
-
+		if (point.y < 0)
+		{
+			return;
+		}
 
 		//get the infomation about the map
 		int id = ground->getTileGIDAt(point);
