@@ -19,7 +19,7 @@ private:
 	Node* node;
 	std::string font = "fonts/Marker Felt.ttf";
 	int size = 40;
-	Label* label,*positionX,*positionY,*name,*hp,*terrain,*player,*owner;
+	Label* label,*positionX,*positionY,*name,*hp,*terrain,*player,*owner,*attack;
 };
 
 #endif // GameStatus_h__

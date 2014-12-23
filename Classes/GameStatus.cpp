@@ -42,6 +42,9 @@ GameStatus::GameStatus(Node* node)
 	owner->setPosition(1400, 1050);
 	node->addChild(owner, 1);
 
+	attack = Label::createWithTTF("attack", font, size);
+	attack->setPosition(1200, 1050);
+	node->addChild(attack, 1);
 
 }
 
@@ -64,12 +67,14 @@ void GameStatus::showUnit(GameUnit* unit)
 		positionX->setString("");
 		positionY->setString("");
 		owner->setString("");
+		attack->setString("");
 		return;
 	}
 	name->setString(unit->name);
 	hp->setString(GameHelper::intToString(unit->hp));
 	positionX->setString(GameHelper::intToString(unit->x));
 	positionY->setString(GameHelper::intToString(unit->y));
+	attack->setString("atk: " + GameHelper::intToString(unit->attack));
 	if (unit->owner == 1)
 	{
 		owner->setString("Player1");

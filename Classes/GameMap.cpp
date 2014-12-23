@@ -151,7 +151,30 @@ void GameMap::dealWithTouch()
 		GameUnit* t = getUnitByXY(point.x, point.y);
 		if (t != nullptr)
 		{
-			return;
+			if (currentUnit->owner != t->owner)
+			{
+				t->hp -= currentUnit->attack;
+				if (t->hp <= 0)
+				{
+					delete t;
+					CCLOG("delete:");
+					int i=-1;
+					for (std::vector<GameUnit*>::iterator it = units.begin(); it != units.end(); ++it)
+					{
+						i++;
+						if (*it == t)
+						{
+							units.erase(units.begin() + i);
+							break;
+						}
+					}
+						
+				}
+			}
+			else
+			{
+				return;
+			}			
 		}
 		else
 		{ 
@@ -167,7 +190,7 @@ void GameMap::dealWithTouch()
 					units.push_back(sd);
 					sd->setXY(point.x, point.y);
 	
-					CCLOG("dd");
+					CCLOG("new unit");
 					count++;
 					gameStatus->setCount(count);
 					mode = normal;

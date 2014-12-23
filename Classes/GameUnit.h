@@ -18,6 +18,7 @@ public:
 	Point getXY();
 	int x = -1, y = -1;
 	int hp = 100;
+	int attack = ((int)(rand()))%100;
 	int owner;
 	string name = "Warrior"+GameHelper::intToString(count);
 private:
