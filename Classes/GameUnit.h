@@ -14,7 +14,7 @@ public:
 	Point getXY();
 	int x = -1, y = -1;
 	int hp = 100;
-	string name = "Warrior"+to_string(count);
+	string name = "Warrior"+GameHelper::intToString(count);
 private:
 	Node* node;
 	static int count;

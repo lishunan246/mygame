@@ -1,6 +1,7 @@
 #pragma once
 #include "cocos2d.h"
 #include "GameUnit.h"
+#include "GameHelper.h"
 USING_NS_CC;
 
 class GameStatus

@@ -42,7 +42,7 @@ GameStatus::~GameStatus()
 
 void GameStatus::setCount(int count)
 {
-	label->setString(std::to_string(count));
+	label->setString(GameHelper::intToString(count));
 }
 
 void GameStatus::showUnit(GameUnit* unit)
@@ -56,9 +56,9 @@ void GameStatus::showUnit(GameUnit* unit)
 		return;
 	}
 	name->setString(unit->name);
-	hp->setString(to_string(unit->hp));
-	positionX->setString(to_string(unit->x));
-	positionY->setString(to_string(unit->y));
+	hp->setString(GameHelper::intToString(unit->hp));
+	positionX->setString(GameHelper::intToString(unit->x));
+	positionY->setString(GameHelper::intToString(unit->y));
 }
 
 void GameStatus::showTerrain(string s)

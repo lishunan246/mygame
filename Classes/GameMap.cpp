@@ -106,7 +106,7 @@ void GameMap::dealWithTouch()
 
 GameUnit* GameMap::getUnitByXY(int x, int y)
 {
-	for each (GameUnit* var in units)
+	for (GameUnit* var : units)
 	{
 		if (Point(x, y) == var->getXY())
 		{
