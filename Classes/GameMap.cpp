@@ -37,11 +37,11 @@ bool GameMap::init()
 
 	auto label = Label::createWithTTF("New Unit", "fonts/Marker Felt.ttf", 40);
 	auto newUnit = MenuItemLabel::create(label, CC_CALLBACK_1(GameMap::newUnitCallback, this));
-	newUnit->setPosition(100, 1000);
+	newUnit->setPosition(300, 1050);
 
 	auto label2 = Label::createWithTTF("End turn", "fonts/Marker Felt.ttf", 40);	
 	auto endTurn = MenuItemLabel::create(label2, CC_CALLBACK_1(GameMap::endTurnCallback, this));
-	endTurn->setPosition(300, 1050);
+	endTurn->setPosition(300, 1000);
 
 	// create menu, it's an autorelease object
 	auto menu = Menu::create(closeItem,newUnit,endTurn, NULL);
@@ -147,12 +147,26 @@ void GameMap::dealWithTouch()
 		}
 		gameStatus->showTerrain(terrain);
 
-
+		//get unit when the key is released
 		GameUnit* t = getUnitByXY(point.x, point.y);
+
+		
+
+
+		//attacking
 		if (t != nullptr)
 		{
+			//cannot use units that don't belong to you
+			if (currentUnit != nullptr&&currentUnit->owner != currentPlayer)
+				return;
+
 			if (currentUnit->owner != t->owner)
 			{
+				//if no stamina or distance !=1
+				if (currentUnit->stamina == 0 || GameHelper::getDistance(currentUnit->getXY(), t->getXY()) != 1)
+				{
+					return;
+				}
 				currentUnit->stamina = 0;
 				t->hp -= currentUnit->attack;
 				if (t->hp <= 0)
@@ -177,7 +191,7 @@ void GameMap::dealWithTouch()
 				return;
 			}			
 		}
-		else
+		else//moving and creating unit
 		{ 
 			switch (mode)
 			{
@@ -198,16 +212,18 @@ void GameMap::dealWithTouch()
 					break;
 				}
 			case moveUnit:
-				currentUnit->moveToPoint(point);
-				mode = normal;
-				break;
-			}
-			
+				{
+					//cannot use units that don't belong to you
+					if (currentUnit != nullptr&&currentUnit->owner != currentPlayer)
+						return;
+
+					currentUnit->moveToPoint(point);
+					mode = normal;
+					break;
+				}
+			}			
 		}
-		
-
 	};
-
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, _tileMap);
 }

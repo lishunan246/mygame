@@ -45,23 +45,8 @@ Point GameUnit::getXY()
 
 bool GameUnit::moveToPoint(Point p)
 {
-	int c = 0;
-	if (p.x > x)
-	{
-		c += p.x - x;
-	}
-	else
-	{
-		c += x - p.x;
-	}
-	if (p.y > y)
-	{
-		c += p.y - y;
-	}
-	else
-	{
-		c += y - p.y;
-	}
+	Point t = Point(x, y);
+	int c = GameHelper::getDistance(p, t);
 
 	if (c <= stamina)
 	{

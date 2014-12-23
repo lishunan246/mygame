@@ -1,14 +1,6 @@
 #include "GameHelper.h"
 USING_NS_CC;
 using namespace std;
-GameHelper::GameHelper()
-{
-}
-
-
-GameHelper::~GameHelper()
-{
-}
 
 Point GameHelper::MapToScreen(Point x)
 {
@@ -52,4 +44,26 @@ string GameHelper::intToString(int number){
         number = number/10;
     }
     return number_string;
+}
+
+int GameHelper::getDistance(Point p1, Point p2)
+{
+	int c = 0;
+	if (p1.x > p2.x)
+	{
+		c += p1.x - p2.x;
+	}
+	else
+	{
+		c += p2.x - p1.x;
+	}
+	if (p1.y > p2.y)
+	{
+		c += p1.y - p2.y;
+	}
+	else
+	{
+		c += p2.y - p1.y;
+	}
+	return c;
 }

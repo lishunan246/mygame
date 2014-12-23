@@ -6,8 +6,7 @@ using namespace std;
 class GameHelper
 {
 public:
-	GameHelper();
-	~GameHelper();
+	static int getDistance(Point p1, Point p2);
 	static Point SrceenToMap(Point x);
 	static Point MapToScreen(Point x);
 	static Point ScreenToScreen(Point x);

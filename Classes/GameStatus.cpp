@@ -27,7 +27,8 @@ GameStatus::GameStatus(Node* node)
 	node->addChild(positionY, 1);
 
 	name = Label::createWithTTF("Name", font, size);
-	name->setPosition(1600, 1050);
+	name->setPosition(1200, 1050);
+	
 	node->addChild(name, 1);
 
 	hp = Label::createWithTTF("HP", font, size);
@@ -43,7 +44,7 @@ GameStatus::GameStatus(Node* node)
 	node->addChild(owner, 1);
 
 	attack = Label::createWithTTF("attack", font, size);
-	attack->setPosition(1200, 1050);
+	attack->setPosition(1600, 1050);
 	node->addChild(attack, 1);
 
 	stm = Label::createWithTTF("stm", font, size);
@@ -75,9 +76,9 @@ void GameStatus::showUnit(GameUnit* unit)
 		return;
 	}
 	name->setString(unit->name);
-	hp->setString(GameHelper::intToString(unit->hp));
-	positionX->setString(GameHelper::intToString(unit->x));
-	positionY->setString(GameHelper::intToString(unit->y));
+	hp->setString("HP: "+GameHelper::intToString(unit->hp));
+	positionX->setString("X: "+GameHelper::intToString(unit->x));
+	positionY->setString("Y: "+GameHelper::intToString(unit->y));
 	attack->setString("atk: " + GameHelper::intToString(unit->attack));
 	stm->setString("stm: " + GameHelper::intToString(unit->stamina));
 	if (unit->owner == 1)
