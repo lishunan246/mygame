@@ -16,9 +16,14 @@ public:
 	Sprite* sprite;
 	void setXY(int x, int y);
 	Point getXY();
+
+	bool moveToPoint(Point p);
+
 	int x = -1, y = -1;
 	int hp = 100;
 	int attack = ((int)(rand()))%100;
+	int maxStamina = 5;
+	int stamina=maxStamina;
 	int owner;
 	string name = "Warrior"+GameHelper::intToString(count);
 private:

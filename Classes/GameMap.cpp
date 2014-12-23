@@ -153,6 +153,7 @@ void GameMap::dealWithTouch()
 		{
 			if (currentUnit->owner != t->owner)
 			{
+				currentUnit->stamina = 0;
 				t->hp -= currentUnit->attack;
 				if (t->hp <= 0)
 				{
@@ -197,7 +198,7 @@ void GameMap::dealWithTouch()
 					break;
 				}
 			case moveUnit:
-				currentUnit->setXY(point.x, point.y);
+				currentUnit->moveToPoint(point);
 				mode = normal;
 				break;
 			}
@@ -233,6 +234,7 @@ void GameMap::update(float delta)
 		break;
 	case 2:
 		gameStatus->showPlayer("Player2");
+
 		break;
 	}
 }
@@ -244,6 +246,13 @@ void GameMap::newUnitCallback(cocos2d::Ref* pSender)
 
 void GameMap::endTurnCallback(cocos2d::Ref* pSender)
 {
+	for (GameUnit* i : units)
+	{
+		if (i->owner == currentPlayer)
+		{
+			i->stamina = i->maxStamina;
+		}
+	}
 	switch (currentPlayer)
 	{
 	case 1:

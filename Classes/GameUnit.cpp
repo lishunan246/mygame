@@ -42,3 +42,36 @@ Point GameUnit::getXY()
 {
 	return Point(x, y);
 }
+
+bool GameUnit::moveToPoint(Point p)
+{
+	int c = 0;
+	if (p.x > x)
+	{
+		c += p.x - x;
+	}
+	else
+	{
+		c += x - p.x;
+	}
+	if (p.y > y)
+	{
+		c += p.y - y;
+	}
+	else
+	{
+		c += y - p.y;
+	}
+
+	if (c <= stamina)
+	{
+		stamina -= c;
+		setXY(p.x, p.y);
+		return true;
+	}
+	else
+	{
+		CCLOG("no stamina");
+		return false;
+	}
+}
