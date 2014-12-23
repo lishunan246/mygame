@@ -2,9 +2,18 @@
 
 int GameUnit::count = 0;
 
-GameUnit::GameUnit(Node* node)
+GameUnit::GameUnit(int player,Node* node)
 {
-	sprite=Sprite::create("Player.png");
+	this->owner = player;
+	if (player == 1)
+	{
+		sprite = Sprite::create("Player.png");
+	}
+	else
+	{
+		sprite = Sprite::create("Player2.png");
+	}
+	
 	this->node = node;
 	node->addChild(sprite);
 	count++;

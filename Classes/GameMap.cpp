@@ -32,16 +32,16 @@ bool GameMap::init()
 		"CloseSelected.png",
 		CC_CALLBACK_1(GameMap::menuCloseCallback, this));
 
-	closeItem->setPosition(100,1000);
+	closeItem->setPosition(100,1050);
 
 
 	auto label = Label::createWithTTF("New Unit", "fonts/Marker Felt.ttf", 40);
 	auto newUnit = MenuItemLabel::create(label, CC_CALLBACK_1(GameMap::newUnitCallback, this));
-	newUnit->setPosition(100, 1050);
+	newUnit->setPosition(100, 1000);
 
-	auto label2 = Label::createWithTTF("End turn", "fonts/Marker Felt.ttf", 40);
-	label2->setPosition(300, 1050);
+	auto label2 = Label::createWithTTF("End turn", "fonts/Marker Felt.ttf", 40);	
 	auto endTurn = MenuItemLabel::create(label2, CC_CALLBACK_1(GameMap::endTurnCallback, this));
+	endTurn->setPosition(300, 1050);
 
 	// create menu, it's an autorelease object
 	auto menu = Menu::create(closeItem,newUnit,endTurn, NULL);
@@ -90,6 +90,8 @@ void GameMap::dealWithTouch()
 		return true;
 	};
 
+	//listener->onTouchMoved
+
 	
 	listener->onTouchEnded = [&](Touch* touch, Event* event)
 	{
@@ -100,7 +102,7 @@ void GameMap::dealWithTouch()
 			return;
 		}
 
-		//get the infomation about the map
+		//get the information about the map
 		int id = ground->getTileGIDAt(point);
 		string terrain = "";
 		if (id != 0)
@@ -127,7 +129,7 @@ void GameMap::dealWithTouch()
 				currentUnit = nullptr;
 				break;
 			case newUnit:
-				auto sd = new GameUnit(this);
+				GameUnit* sd = new GameUnit(currentPlayer,this);
 				currentUnit = sd;
 				units.push_back(sd);
 				sd->setXY(point.x, point.y);
@@ -163,6 +165,15 @@ GameUnit* GameMap::getUnitByXY(int x, int y)
 void GameMap::update(float delta)
 {
 	gameStatus->showUnit(currentUnit);
+	switch (currentPlayer)
+	{
+	case 1:
+		gameStatus->showPlayer("Player1");
+		break;
+	case 2:
+		gameStatus->showPlayer("Player2");
+		break;
+	}
 }
 
 void GameMap::newUnitCallback(cocos2d::Ref* pSender)
@@ -174,11 +185,11 @@ void GameMap::endTurnCallback(cocos2d::Ref* pSender)
 {
 	switch (currentPlayer)
 	{
-	case player1:
-		currentPlayer = player2;
+	case 1:
+		currentPlayer = 2;
 		break;
-	case player2:
-		currentPlayer = player1;
+	case 2:
+		currentPlayer = 1;
 		break;
 	}
 }

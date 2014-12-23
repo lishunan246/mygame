@@ -4,14 +4,18 @@ GameStatus::GameStatus(Node* node)
 {
 	this->node = node;
 
-	label = Label::createWithTTF("Hello", font, size);
+	label = Label::createWithTTF("0", font, size);
 
 	// position the label on the center of the screen
 	label->setPosition(600, 1000);
 
 	// add the label as a child to this layer
 	node->addChild(label, 1);
-	label->setString("zero");
+
+	player = Label::createWithTTF("player", font, size);
+	player->setPosition(600, 1050);
+	node->addChild(player, 1);
+
 
 	positionX = Label::createWithTTF("X:", font, size);
 	positionX->setPosition(1800, 1050);
@@ -34,9 +38,11 @@ GameStatus::GameStatus(Node* node)
 	terrain->setPosition(1400, 1000);
 	node->addChild(terrain, 1);
 
-	player = Label::createWithTTF("player", font, size);
-	player->setPosition(1400, 1050);
-	node->addChild(player, 1);
+	owner = Label::createWithTTF("owner", font, size);
+	owner->setPosition(1400, 1050);
+	node->addChild(owner, 1);
+
+
 }
 
 
@@ -57,15 +63,29 @@ void GameStatus::showUnit(GameUnit* unit)
 		hp->setString("");
 		positionX->setString("");
 		positionY->setString("");
+		owner->setString("");
 		return;
 	}
 	name->setString(unit->name);
 	hp->setString(GameHelper::intToString(unit->hp));
 	positionX->setString(GameHelper::intToString(unit->x));
 	positionY->setString(GameHelper::intToString(unit->y));
+	if (unit->owner == 1)
+	{
+		owner->setString("Player1");
+	}
+	else
+	{
+		owner->setString("Player2");
+	}
 }
 
 void GameStatus::showTerrain(string s)
 {
 	terrain->setString(s);
+}
+
+void GameStatus::showPlayer(string s)
+{
+	player->setString(s);
 }

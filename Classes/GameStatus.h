@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GameStatus_h__
+#define GameStatus_h__
+
 #include "cocos2d.h"
 #include "GameUnit.h"
 #include "GameHelper.h"
@@ -12,10 +14,12 @@ public:
 	void setCount(int count);
 	void showUnit(GameUnit* unit);
 	void showTerrain(string s);
+	void showPlayer(string s);
 private:
 	Node* node;
 	std::string font = "fonts/Marker Felt.ttf";
 	int size = 40;
-	Label* label,*positionX,*positionY,*name,*hp,*terrain,*player;
+	Label* label,*positionX,*positionY,*name,*hp,*terrain,*player,*owner;
 };
 
+#endif // GameStatus_h__
