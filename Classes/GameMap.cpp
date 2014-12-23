@@ -51,7 +51,7 @@ bool GameMap::init()
 
 
 
-	_tileMap = TMXTiledMap::create("map.tmx");
+	_tileMap = TMXTiledMap::create("map2.tmx");
 	ground = _tileMap->getLayer("ground");
 	assert(ground != nullptr);
 

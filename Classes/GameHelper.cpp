@@ -4,12 +4,12 @@ using namespace std;
 
 Point GameHelper::MapToScreen(Point x)
 {
-	return Point(16 + 32 * x.x, 16 + 32 * (29-x.y));
+	return Point(size/2 + size * x.x, size/2 + size * (row-1-x.y));
 }
 
 Point GameHelper::SrceenToMap(Point x)
 {
-	return Point((int)x.x / 32, 29-(int)x.y / 32);
+	return Point((int)x.x / size, row-1-(int)x.y / size);
 }
 
 Point GameHelper::ScreenToScreen(Point x)
