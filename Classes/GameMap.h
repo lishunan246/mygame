@@ -10,7 +10,7 @@ using namespace std;
 
 enum Mode
 {
-	normal, newUnit
+	normal, newUnit, moveUnit
 };
 
 class GameMap : public cocos2d::Layer
@@ -42,6 +42,7 @@ private:
 	GameUnit* currentUnit=nullptr;
 	Mode mode = normal;
 	int currentPlayer = 1;
+	Point startPoint;
 };
 
 #endif // GameMap_h__

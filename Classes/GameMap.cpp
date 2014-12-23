@@ -87,10 +87,44 @@ void GameMap::dealWithTouch()
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [&](Touch* touch, Event* event)
 	{
+		Point point = Director::getInstance()->convertToGL(touch->getPreviousLocationInView());
+		startPoint= point = GameHelper::SrceenToMap(point);
+		if (point.y < 0)
+		{
+			return false;
+		}
+
+		//get the information about the map
+		int id = ground->getTileGIDAt(point);
+		string terrain = "";
+		if (id != 0)
+		{
+			Value property = _tileMap->getPropertiesForGID(id);
+			Value p = property.asValueMap().at("type");
+			terrain = p.asString();
+		}
+		gameStatus->showTerrain(terrain);
+
+
+		GameUnit* t = getUnitByXY(point.x, point.y);
+		if (t != nullptr)
+		{
+			gameStatus->setCount(count);
+			currentUnit = t;
+			return true;
+		}
+
 		return true;
 	};
 
-	//listener->onTouchMoved
+	listener->onTouchMoved = [&](Touch *touch, Event *event)
+	{
+		if (getUnitByXY(startPoint.x, startPoint.y) != nullptr)
+		{
+			mode = moveUnit;
+		}
+
+	};
 
 	
 	listener->onTouchEnded = [&](Touch* touch, Event* event)
@@ -117,8 +151,6 @@ void GameMap::dealWithTouch()
 		GameUnit* t = getUnitByXY(point.x, point.y);
 		if (t != nullptr)
 		{
-			gameStatus->setCount(count);
-			currentUnit = t;
 			return;
 		}
 		else
@@ -129,14 +161,20 @@ void GameMap::dealWithTouch()
 				currentUnit = nullptr;
 				break;
 			case newUnit:
-				GameUnit* sd = new GameUnit(currentPlayer,this);
-				currentUnit = sd;
-				units.push_back(sd);
-				sd->setXY(point.x, point.y);
-
-				CCLOG("dd");
-				count++;
-				gameStatus->setCount(count);
+				{
+					GameUnit* sd = new GameUnit(currentPlayer,this);
+					currentUnit = sd;
+					units.push_back(sd);
+					sd->setXY(point.x, point.y);
+	
+					CCLOG("dd");
+					count++;
+					gameStatus->setCount(count);
+					mode = normal;
+					break;
+				}
+			case moveUnit:
+				currentUnit->setXY(point.x, point.y);
 				mode = normal;
 				break;
 			}
