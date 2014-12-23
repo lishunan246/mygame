@@ -16,6 +16,6 @@ private:
 	Node* node;
 	std::string font = "fonts/Marker Felt.ttf";
 	int size = 40;
-	Label* label,*positionX,*positionY,*name,*hp,*terrain;
+	Label* label,*positionX,*positionY,*name,*hp,*terrain,*player;
 };
 

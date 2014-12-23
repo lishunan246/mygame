@@ -3,6 +3,8 @@
 #include "GameHelper.h"
 USING_NS_CC;
 using namespace std;
+
+
 class GameUnit
 {
 public:
@@ -18,5 +20,6 @@ public:
 private:
 	Node* node;
 	static int count;
+	
 };
 

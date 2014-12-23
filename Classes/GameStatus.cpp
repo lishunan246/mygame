@@ -7,7 +7,7 @@ GameStatus::GameStatus(Node* node)
 	label = Label::createWithTTF("Hello", font, size);
 
 	// position the label on the center of the screen
-	label->setPosition(40, 1000);
+	label->setPosition(600, 1000);
 
 	// add the label as a child to this layer
 	node->addChild(label, 1);
@@ -33,6 +33,10 @@ GameStatus::GameStatus(Node* node)
 	terrain = Label::createWithTTF("terrain", font, size);
 	terrain->setPosition(1400, 1000);
 	node->addChild(terrain, 1);
+
+	player = Label::createWithTTF("player", font, size);
+	player->setPosition(1400, 1050);
+	node->addChild(player, 1);
 }
 
 

@@ -5,6 +5,16 @@
 #include "GameStatus.h"
 
 using namespace std;
+
+enum Mode
+{
+	normal, newUnit
+};
+
+enum Player
+{
+	player1,player2
+};
 class GameMap : public cocos2d::Layer
 {
 public:
@@ -16,6 +26,8 @@ public:
 
 	// a selector callback
 	void menuCloseCallback(cocos2d::Ref* pSender);
+	void newUnitCallback(cocos2d::Ref* pSender);
+	void endTurnCallback(cocos2d::Ref* pSender);
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(GameMap);
@@ -31,5 +43,7 @@ private:
 	int count = 0;
 	std::vector<GameUnit*> units;
 	GameUnit* currentUnit=nullptr;
+	Mode mode = normal;
+	Player currentPlayer = player1;
 };
 
