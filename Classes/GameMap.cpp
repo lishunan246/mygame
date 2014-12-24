@@ -190,7 +190,27 @@ void GameMap::dealWithTouch()
 					if (currentUnit != nullptr&&currentUnit->owner != currentPlayer)
 						return;
 
-					currentUnit->moveToPoint(point);
+					if (currentUnit->moveToPoint(point))
+					{
+						if (currentPlayer == 1)
+						{
+							if (getType(point)=="base2")
+							{
+								CCLOG("player1 win");
+								Director::getInstance()->replaceScene(GameEndScene::createScene());
+							}
+						}
+						else
+						{
+							if (getType(point) == "base1")
+							{
+								CCLOG("player2 win");
+								Director::getInstance()->replaceScene(GameEndScene::createScene());
+							}
+						}
+					}
+					
+					
 					mode = normal;
 					break;
 				}

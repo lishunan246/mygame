@@ -5,6 +5,7 @@
 #include "GameUnit.h"
 #include "GameHelper.h"
 #include "GameStatus.h"
+#include "GameEndScene.h"
 
 using namespace std;
 
