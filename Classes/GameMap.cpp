@@ -113,7 +113,7 @@ void GameMap::dealWithTouch()
 	listener->onTouchMoved = [&](Touch *touch, Event *event)
 	{
 		GameUnit* t = getUnitByXY(startPoint.x, startPoint.y);
-		if ( t!= nullptr&&t->owner==currentPlayer)
+		if ( t!= nullptr&&t->owner==currentPlayer&&t->stamina!=0)
 		{
 			mode = moveUnit;
 			t->getSprite()->setPosition(Director::getInstance()->convertToGL(touch->getPreviousLocationInView()));
@@ -328,6 +328,7 @@ bool GameMap::newUnit()
 	CCLOG("new unit");
 	count++;
 	gameStatus->setCount(count);
+	return true;
 }
 
 GameMap::GameMap()
