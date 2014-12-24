@@ -16,7 +16,7 @@ public:
 	Sprite* sprite;
 	void setXY(int x, int y);
 	Point getXY();
-
+	void resetLocation();
 	bool moveToPoint(Point p);
 
 	int x = -1, y = -1;

@@ -60,3 +60,8 @@ bool GameUnit::moveToPoint(Point p)
 		return false;
 	}
 }
+
+void GameUnit::resetLocation()
+{
+	setXY(x, y);
+}

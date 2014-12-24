@@ -113,9 +113,11 @@ void GameMap::dealWithTouch()
 
 	listener->onTouchMoved = [&](Touch *touch, Event *event)
 	{
-		if (getUnitByXY(startPoint.x, startPoint.y) != nullptr)
+		GameUnit* t = getUnitByXY(startPoint.x, startPoint.y);
+		if ( t!= nullptr)
 		{
 			mode = moveUnit;
+			t->getSprite()->setPosition(Director::getInstance()->convertToGL(touch->getPreviousLocationInView()));
 		}
 
 	};
@@ -129,14 +131,13 @@ void GameMap::dealWithTouch()
 		{
 			return;
 		}
+		if (currentUnit != nullptr)
+			currentUnit->resetLocation();
 
 		gameStatus->showTerrain(getType(point));
 
 		//get unit when the key is released
 		GameUnit* t = getUnitByXY(point.x, point.y);
-
-		
-
 
 		//attacking
 		if (t != nullptr)
