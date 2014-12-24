@@ -15,11 +15,12 @@ public:
 	void showUnit(GameUnit* unit);
 	void showTerrain(string s);
 	void showPlayer(string s);
+	void showMoney(int m);
 private:
 	Node* node;
 	std::string font = "fonts/Marker Felt.ttf";
 	int size = 40;
-	Label* label,*positionX,*positionY,*name,*hp,*terrain,*player,*owner,*attack,*stm;
+	Label* label,*positionX,*positionY,*name,*hp,*terrain,*player,*owner,*attack,*stm,*money;
 };
 
 #endif // GameStatus_h__
