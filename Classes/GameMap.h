@@ -47,6 +47,7 @@ private:
 	GameStatus* gameStatus=nullptr;
 	int count = 0;
 	std::vector<GameUnit*> units;
+	std::vector<Sprite*> oks;
 	GameUnit* currentUnit=nullptr;
 	Mode mode = normal;
 
@@ -54,6 +55,7 @@ private:
 	int currentPlayer = 1;
 	int money[3];
 	Point startPoint;
+	Sprite* moveAble = Sprite::create("ok.png");
 };
 
 #endif // GameMap_h__

@@ -235,6 +235,12 @@ GameUnit* GameMap::getUnitByXY(int x, int y)
 
 void GameMap::update(float delta)
 {
+	for (Sprite *t : oks)
+	{
+		this->removeChild(t);
+	}
+	oks.clear();
+
 	gameStatus->showMoney(money[currentPlayer]);
 	gameStatus->showUnit(currentUnit);
 	switch (currentPlayer)
@@ -244,9 +250,25 @@ void GameMap::update(float delta)
 		break;
 	case 2:
 		gameStatus->showPlayer("Player2");
-
 		break;
 	}
+
+	if (currentUnit==nullptr||currentUnit->stamina == 0||currentUnit->owner!=currentPlayer)
+		return;
+
+	Point p = currentUnit->getXY();
+
+	for (int i = 0; i < GameHelper::col; i++)
+		for (int j = 0; j < GameHelper::row; j++)
+		{
+			if (GameHelper::getDistance(p, Point(i, j)) <= currentUnit->stamina)
+			{
+				Sprite *t = Sprite::create("ok.png");
+				t->setPosition(GameHelper::MapToScreen(Point(i, j)));
+				this->addChild(t);
+				oks.push_back(t);
+			}
+		}
 }
 
 void GameMap::newUnitCallback(cocos2d::Ref* pSender)
@@ -334,5 +356,5 @@ bool GameMap::newUnit()
 GameMap::GameMap()
 {
 	for (int i = 0; i < 3; i++)
-		money[i] = 500;
+		money[i] = 200;
 }
