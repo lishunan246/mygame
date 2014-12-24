@@ -114,7 +114,7 @@ void GameMap::dealWithTouch()
 	listener->onTouchMoved = [&](Touch *touch, Event *event)
 	{
 		GameUnit* t = getUnitByXY(startPoint.x, startPoint.y);
-		if ( t!= nullptr)
+		if ( t!= nullptr&&t->owner==currentPlayer)
 		{
 			mode = moveUnit;
 			t->getSprite()->setPosition(Director::getInstance()->convertToGL(touch->getPreviousLocationInView()));
