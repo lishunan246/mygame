@@ -10,7 +10,7 @@ using namespace std;
 
 enum Mode
 {
-	normal, newUnit, moveUnit
+	normal, moveUnit
 };
 
 class GameMap : public cocos2d::Layer
@@ -30,6 +30,12 @@ public:
 	CREATE_FUNC(GameMap);
 
 	void dealWithTouch();
+
+	void newUnit();
+	
+
+	string getType(Point point);
+
 	GameUnit* getUnitByXY(int x, int y);
 	virtual void update(float delta);
 
@@ -41,6 +47,8 @@ private:
 	std::vector<GameUnit*> units;
 	GameUnit* currentUnit=nullptr;
 	Mode mode = normal;
+
+	//current player can be 1 or 2
 	int currentPlayer = 1;
 	Point startPoint;
 };

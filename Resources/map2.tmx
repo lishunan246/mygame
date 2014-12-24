@@ -1,21 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="15" tilewidth="64" tileheight="64">
- <tileset firstgid="1" name="tmw_desert_spacing2" tilewidth="64" tileheight="64" spacing="2" margin="2">
-  <image source="TileGameResources/tmw_desert_spacing2.png" width="530" height="398"/>
-  <tile id="29">
+ <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64">
+  <image source="tiles.png" trans="ffffff" width="512" height="9600"/>
+  <tile id="0">
    <properties>
-    <property name="type" value="ground"/>
+    <property name="type" value="grass"/>
    </properties>
   </tile>
-  <tile id="31">
+  <tile id="17">
    <properties>
-    <property name="type" value="stone"/>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="type" value="sand"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="32">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="44">
+   <properties>
+    <property name="type" value="water"/>
+   </properties>
+  </tile>
+  <tile id="137">
+   <properties>
+    <property name="type" value="base2"/>
+   </properties>
+  </tile>
+  <tile id="164">
+   <properties>
+    <property name="type" value="base1"/>
    </properties>
   </tile>
  </tileset>
  <layer name="ground" width="30" height="15">
   <data encoding="base64" compression="zlib">
-   eJyTY2BgkBvFo3iAsQIOTEs76O03Ut1IbT8Tq55WYU5PewmlK2qEM7Xjipp+Gwj3DGUMAMlONRE=
+   eJxjZGBgYBzCWBeItYBYh0R9XUSqE8MhrgzEQkCsSAM/idHZXjECdoLCWJvK9uKzD91OatlLyI9aUDulkLAKlezFJUePdITNflUq+o/cdDXc7GUcQHvR/U1OGCwdIHcPBgwAJMkJIQ==
   </data>
  </layer>
 </map>

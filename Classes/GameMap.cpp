@@ -96,14 +96,8 @@ void GameMap::dealWithTouch()
 
 		//get the information about the map
 		int id = ground->getTileGIDAt(point);
-		string terrain = "";
-		if (id != 0)
-		{
-			Value property = _tileMap->getPropertiesForGID(id);
-			Value p = property.asValueMap().at("type");
-			terrain = p.asString();
-		}
-		gameStatus->showTerrain(terrain);
+
+		gameStatus->showTerrain(getType(point));
 
 
 		GameUnit* t = getUnitByXY(point.x, point.y);
@@ -136,16 +130,7 @@ void GameMap::dealWithTouch()
 			return;
 		}
 
-		//get the information about the map
-		int id = ground->getTileGIDAt(point);
-		string terrain = "";
-		if (id != 0)
-		{
-			Value property = _tileMap->getPropertiesForGID(id);
-			Value p = property.asValueMap().at("type");
-			terrain = p.asString();
-		}
-		gameStatus->showTerrain(terrain);
+		gameStatus->showTerrain(getType(point));
 
 		//get unit when the key is released
 		GameUnit* t = getUnitByXY(point.x, point.y);
@@ -198,19 +183,7 @@ void GameMap::dealWithTouch()
 			case normal:
 				currentUnit = nullptr;
 				break;
-			case newUnit:
-				{
-					GameUnit* sd = new GameUnit(currentPlayer,this);
-					currentUnit = sd;
-					units.push_back(sd);
-					sd->setXY(point.x, point.y);
-	
-					CCLOG("new unit");
-					count++;
-					gameStatus->setCount(count);
-					mode = normal;
-					break;
-				}
+
 			case moveUnit:
 				{
 					//cannot use units that don't belong to you
@@ -257,7 +230,7 @@ void GameMap::update(float delta)
 
 void GameMap::newUnitCallback(cocos2d::Ref* pSender)
 {
-	mode = newUnit;
+	newUnit();
 }
 
 void GameMap::endTurnCallback(cocos2d::Ref* pSender)
@@ -280,3 +253,51 @@ void GameMap::endTurnCallback(cocos2d::Ref* pSender)
 	}
 }
 
+string GameMap::getType(Point point)
+{
+	int id = ground->getTileGIDAt(point);
+
+	if (id != 0)
+	{
+		Value property = _tileMap->getPropertiesForGID(id);
+		Value p = property.asValueMap().at("type");
+		return p.asString();
+	}
+	else
+		return "";
+}
+
+void GameMap::newUnit()
+{
+
+	Point p;
+	bool flag = false;
+	for (int i = 0; i < GameHelper::col&&flag == false; i++)
+		for (int j = 0; j < GameHelper::row; j++)
+		{
+			p = Point(i, j);
+			if ((currentPlayer == 1 && getType(p) == "base1") ||
+				(currentPlayer == 2 && getType(p) == "base2"))
+			{
+				flag = true;
+				break;
+			}
+
+		}
+
+	if (getUnitByXY(p.x, p.y) != nullptr)
+	{
+		CCLOG("there is unit in base");
+		return;
+	}
+
+	GameUnit* sd = new GameUnit(currentPlayer, this);
+	currentUnit = sd;
+	units.push_back(sd);
+
+	sd->setXY(p.x, p.y);
+
+	CCLOG("new unit");
+	count++;
+	gameStatus->setCount(count);
+}
