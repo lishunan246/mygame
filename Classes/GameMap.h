@@ -17,6 +17,7 @@ enum Mode
 class GameMap : public cocos2d::Layer
 {
 public:
+	GameMap();
 	// there's no 'id' in cpp, so we recommend returning the class instance pointer
 	static cocos2d::Scene* createScene();
 
@@ -32,8 +33,8 @@ public:
 
 	void dealWithTouch();
 
-	void newUnit();
-	
+
+	bool newUnit();	
 
 	string getType(Point point);
 
@@ -51,6 +52,7 @@ private:
 
 	//current player can be 1 or 2
 	int currentPlayer = 1;
+	int money[3];
 	Point startPoint;
 };
 

@@ -16,6 +16,9 @@ GameStatus::GameStatus(Node* node)
 	player->setPosition(600, 1050);
 	node->addChild(player, 1);
 
+	money = Label::createWithTTF("money", font, size);
+	money->setPosition(800, 1050);
+	node->addChild(money, 1);
 
 	positionX = Label::createWithTTF("X:", font, size);
 	positionX->setPosition(1800, 1050);
@@ -99,4 +102,9 @@ void GameStatus::showTerrain(string s)
 void GameStatus::showPlayer(string s)
 {
 	player->setString(s);
+}
+
+void GameStatus::showMoney(int m)
+{
+	money->setString("$" + GameHelper::intToString(m));
 }

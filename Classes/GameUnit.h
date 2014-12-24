@@ -19,6 +19,7 @@ public:
 	void resetLocation();
 	bool moveToPoint(Point p);
 
+	const static int price = 100;
 	int x = -1, y = -1;
 	int hp = 100;
 	int attack = ((int)(rand()))%100;

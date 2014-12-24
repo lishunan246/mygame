@@ -83,7 +83,6 @@ void GameMap::menuCloseCallback(Ref* pSender)
 
 void GameMap::dealWithTouch()
 {
-	CCLOG("ok");
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [&](Touch* touch, Event* event)
 	{
@@ -236,6 +235,7 @@ GameUnit* GameMap::getUnitByXY(int x, int y)
 
 void GameMap::update(float delta)
 {
+	gameStatus->showMoney(money[currentPlayer]);
 	gameStatus->showUnit(currentUnit);
 	switch (currentPlayer)
 	{
@@ -288,8 +288,14 @@ string GameMap::getType(Point point)
 		return "";
 }
 
-void GameMap::newUnit()
+bool GameMap::newUnit()
 {
+	if (money[currentPlayer] < GameUnit::price)
+	{
+		CCLOG("no money");
+		return false;
+	}
+
 
 	Point p;
 	bool flag = false;
@@ -309,7 +315,7 @@ void GameMap::newUnit()
 	if (getUnitByXY(p.x, p.y) != nullptr)
 	{
 		CCLOG("there is unit in base");
-		return;
+		return false;
 	}
 
 	GameUnit* sd = new GameUnit(currentPlayer, this);
@@ -317,8 +323,15 @@ void GameMap::newUnit()
 	units.push_back(sd);
 
 	sd->setXY(p.x, p.y);
+	money[currentPlayer] -= GameUnit::price;
 
 	CCLOG("new unit");
 	count++;
 	gameStatus->setCount(count);
+}
+
+GameMap::GameMap()
+{
+	for (int i = 0; i < 3; i++)
+		money[i] = 500;
 }
