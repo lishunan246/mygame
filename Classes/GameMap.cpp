@@ -1,5 +1,12 @@
 #include "GameMap.h"
+#include "SimpleAudioEngine.h"
 USING_NS_CC;
+
+GameMap::GameMap()
+{
+	for (int i = 0; i < 3; i++)
+		money[i] = 200;
+}
 
 
 Scene* GameMap::createScene()
@@ -141,8 +148,10 @@ void GameMap::dealWithTouch()
 		//attacking
 		if (t != nullptr)
 		{
+			if (currentUnit == nullptr)
+				return;
 			//cannot use units that don't belong to you
-			if (currentUnit != nullptr&&currentUnit->owner != currentPlayer)
+			if (currentUnit->owner != currentPlayer)
 				return;
 
 			if (currentUnit->owner != t->owner)
@@ -152,23 +161,16 @@ void GameMap::dealWithTouch()
 				{
 					return;
 				}
+
+				//fight
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("hit.wav");
 				currentUnit->stamina = 0;
 				t->hp -= currentUnit->attack;
+
+
 				if (t->hp <= 0)
 				{
-					delete t;
-					CCLOG("delete:");
-					int i=-1;
-					for (std::vector<GameUnit*>::iterator it = units.begin(); it != units.end(); ++it)
-					{
-						i++;
-						if (*it == t)
-						{
-							units.erase(units.begin() + i);
-							break;
-						}
-					}
-						
+					kill(t);						
 				}
 			}
 			else
@@ -192,6 +194,7 @@ void GameMap::dealWithTouch()
 
 					if (currentUnit->moveToPoint(point))
 					{
+						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("moved.wav");
 						if (currentPlayer == 1)
 						{
 							if (getType(point)=="base2")
@@ -208,9 +211,7 @@ void GameMap::dealWithTouch()
 								Director::getInstance()->replaceScene(GameEndScene::createScene());
 							}
 						}
-					}
-					
-					
+					}				
 					mode = normal;
 					break;
 				}
@@ -353,8 +354,19 @@ bool GameMap::newUnit()
 	return true;
 }
 
-GameMap::GameMap()
+void GameMap::kill(GameUnit* t)
 {
-	for (int i = 0; i < 3; i++)
-		money[i] = 200;
+	delete t;
+	CCLOG("delete:");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("die.wav");
+	int i = -1;
+	for (std::vector<GameUnit*>::iterator it = units.begin(); it != units.end(); ++it)
+	{
+		i++;
+		if (*it == t)
+		{
+			units.erase(units.begin() + i);
+			break;
+		}
+	}
 }

@@ -1,6 +1,7 @@
 #ifndef GameMap_h__
 #define GameMap_h__
 
+#include "SimpleAudioEngine.h"
 #include "cocos2d.h"
 #include "GameUnit.h"
 #include "GameHelper.h"
@@ -33,6 +34,7 @@ public:
 
 	void dealWithTouch();
 
+	void kill(GameUnit* t);
 
 	bool newUnit();	
 
