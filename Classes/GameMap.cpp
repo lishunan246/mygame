@@ -8,7 +8,6 @@ GameMap::GameMap()
 		money[i] = 200;
 }
 
-
 Scene* GameMap::createScene()
 {
 	// 'scene' is an autorelease object
@@ -41,7 +40,6 @@ bool GameMap::init()
 
 	closeItem->setPosition(100,1050);
 
-
 	auto label = Label::createWithTTF("New Unit", "fonts/Marker Felt.ttf", 40);
 	auto newUnit = MenuItemLabel::create(label, CC_CALLBACK_1(GameMap::newUnitCallback, this));
 	newUnit->setPosition(300, 1050);
@@ -54,9 +52,6 @@ bool GameMap::init()
 	auto menu = Menu::create(closeItem,newUnit,endTurn, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
-
-
-
 
 	_tileMap = TMXTiledMap::create("map3.tmx");
 	ground = _tileMap->getLayer("ground");
@@ -105,7 +100,6 @@ void GameMap::dealWithTouch()
 
 		gameStatus->showTerrain(getType(point));
 
-
 		GameUnit* t = getUnitByXY(point.x, point.y);
 		if (t != nullptr)
 		{
@@ -125,7 +119,6 @@ void GameMap::dealWithTouch()
 			mode = moveUnit;
 			t->getSprite()->setPosition(Director::getInstance()->convertToGL(touch->getPreviousLocationInView()));
 		}
-
 	};
 
 	
@@ -279,6 +272,7 @@ void GameMap::newUnitCallback(cocos2d::Ref* pSender)
 
 void GameMap::endTurnCallback(cocos2d::Ref* pSender)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("endturn.wav");
 	for (GameUnit* i : units)
 	{
 		if (i->owner == currentPlayer)

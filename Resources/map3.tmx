@@ -87,6 +87,11 @@
     <property name="type" value="ground"/>
    </properties>
   </tile>
+  <tile id="39">
+   <properties>
+    <property name="type" value="plant"/>
+   </properties>
+  </tile>
   <tile id="40">
    <properties>
     <property name="type" value="ground"/>
@@ -102,10 +107,15 @@
     <property name="type" value="ground"/>
    </properties>
   </tile>
+  <tile id="45">
+   <properties>
+    <property name="type" value="sign"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="ground" width="30" height="15">
   <data encoding="base64" compression="zlib">
-   eJyTY2BgkBsgzAjETEDMTGd7OYGYC4i56WyvIBALAbHwAIb5YMUKODAt7aC330h1I7X9TKx6WoU5Pe0llK6oEc7UjisQlgRiKSCWptBvpNqrCMRKQKxMo3jAhTWBWAuItelsLzoGAHwSNIE=
+   eJzV0rsOgCAMBVDUSZ3USU0I6uIj4f8/z8tqxBQLNQ5na3pbilZK6Y9kkEMhnFtCBTWzzxpY30ALnVDenxiPlBnSuz3V2JsZY+9MrefkXf8oNT/VPQxBzLe1jH5ODwOMzN1CbuRMMMOS6A4+G+xwvJg5phNo6TTT
   </data>
  </layer>
 </map>
