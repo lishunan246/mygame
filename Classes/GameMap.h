@@ -7,6 +7,7 @@
 #include "GameHelper.h"
 #include "GameStatus.h"
 #include "GameEndScene.h"
+#include "GameEndScene1.h"
 
 using namespace std;
 
@@ -58,6 +59,8 @@ private:
 	int money[3];
 	Point startPoint;
 	Sprite* moveAble = Sprite::create("ok.png");
+	const int maxHP=100;
+	const int mapCount = 3;
 };
 
 #endif // GameMap_h__

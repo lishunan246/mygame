@@ -53,7 +53,11 @@ bool GameMap::init()
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 
-	_tileMap = TMXTiledMap::create("map3.tmx");
+	int t = random(1, 3);
+	
+	string mapName = "map"+GameHelper::intToString(t)+".tmx";
+	CCLOG(mapName.c_str());
+	_tileMap = TMXTiledMap::create(mapName);
 	ground = _tileMap->getLayer("ground");
 	assert(ground != nullptr);
 
@@ -201,7 +205,7 @@ void GameMap::dealWithTouch()
 							if (getType(point) == "base1")
 							{
 								CCLOG("player2 win");
-								Director::getInstance()->replaceScene(GameEndScene::createScene());
+								Director::getInstance()->replaceScene(GameEndScene1::createScene());
 							}
 						}
 					}				
@@ -278,6 +282,17 @@ void GameMap::endTurnCallback(cocos2d::Ref* pSender)
 		if (i->owner == currentPlayer)
 		{
 			i->stamina = i->maxStamina;
+			Point p = i->getXY();
+			if (getType(p) == "sign")
+			{
+				money[currentPlayer] += 50;
+			}
+			else if (getType(p) == "plant")
+			{
+				i->hp += 20;
+				if (i->hp > maxHP)
+					i->hp = maxHP;
+			}
 		}
 	}
 	switch (currentPlayer)
