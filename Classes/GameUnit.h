@@ -22,10 +22,10 @@ public:
 	const static int price = 100;
 	int x = -1, y = -1;
 	int ran = rand() % 50;
-	int hp = 125-ran;
+	int hp = 100-ran;
 	int attack = 25 + ran;
 	int maxStamina = 5;
-	int stamina=maxStamina;
+	int stamina=hp/20+1;
 	int owner;
 	string name = "Warrior"+GameHelper::intToString(count);
 private:

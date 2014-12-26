@@ -287,11 +287,12 @@ void GameMap::newUnitCallback(cocos2d::Ref* pSender)
 void GameMap::endTurnCallback(cocos2d::Ref* pSender)
 {
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("endturn.wav");
+	money[currentPlayer] += 25;
 	for (GameUnit* i : units)
 	{
 		if (i->owner == currentPlayer)
 		{
-			i->stamina = i->maxStamina;
+			i->stamina = i->hp/20+1;
 			Point p = i->getXY();
 			if (getType(p) == "sign")
 			{
