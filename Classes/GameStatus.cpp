@@ -7,18 +7,22 @@ GameStatus::GameStatus(Node* node)
 	label = Label::createWithTTF("0", font, size);
 
 	// position the label on the center of the screen
-	label->setPosition(600, 1000);
+	label->setPosition(700, 1000);
 
 	// add the label as a child to this layer
 	node->addChild(label, 1);
 
 	player = Label::createWithTTF("player", font, size);
-	player->setPosition(600, 1050);
+	player->setPosition(700, 1050);
 	node->addChild(player, 1);
 
 	money = Label::createWithTTF("money", font, size);
-	money->setPosition(800, 1050);
+	money->setPosition(900, 1050);
 	node->addChild(money, 1);
+
+	terrain = Label::createWithTTF("terrain", font, size);
+	terrain->setPosition(900, 1000);
+	node->addChild(terrain, 1);
 
 	positionX = Label::createWithTTF("X:", font, size);
 	positionX->setPosition(1800, 1050);
@@ -38,16 +42,13 @@ GameStatus::GameStatus(Node* node)
 	hp->setPosition(1600, 1000);
 	node->addChild(hp, 1);
 
-	terrain = Label::createWithTTF("terrain", font, size);
-	terrain->setPosition(1400, 1000);
-	node->addChild(terrain, 1);
 
 	owner = Label::createWithTTF("owner", font, size);
 	owner->setPosition(1400, 1050);
 	node->addChild(owner, 1);
 
 	attack = Label::createWithTTF("attack", font, size);
-	attack->setPosition(1600, 1050);
+	attack->setPosition(1400, 1000);
 	node->addChild(attack, 1);
 
 	stm = Label::createWithTTF("stm", font, size);

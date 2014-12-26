@@ -38,15 +38,15 @@ bool GameMap::init()
 		"CloseSelected.png",
 		CC_CALLBACK_1(GameMap::menuCloseCallback, this));
 
-	closeItem->setPosition(100,1050);
+	closeItem->setPosition(100,1025);
 
-	auto label = Label::createWithTTF("New Unit", "fonts/Marker Felt.ttf", 40);
+	auto label = Label::createWithTTF("New Unit", "fonts/Marker Felt.ttf", 50);
 	auto newUnit = MenuItemLabel::create(label, CC_CALLBACK_1(GameMap::newUnitCallback, this));
-	newUnit->setPosition(300, 1050);
+	newUnit->setPosition(300, 1025);
 
-	auto label2 = Label::createWithTTF("End turn", "fonts/Marker Felt.ttf", 40);	
+	auto label2 = Label::createWithTTF("End turn", "fonts/Marker Felt.ttf", 50);	
 	auto endTurn = MenuItemLabel::create(label2, CC_CALLBACK_1(GameMap::endTurnCallback, this));
-	endTurn->setPosition(300, 1000);
+	endTurn->setPosition(500, 1025);
 
 	// create menu, it's an autorelease object
 	auto menu = Menu::create(closeItem,newUnit,endTurn, NULL);
@@ -324,6 +324,7 @@ bool GameMap::newUnit()
 {
 	if (money[currentPlayer] < GameUnit::price)
 	{
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("noMoney.wav");
 		CCLOG("no money");
 		return false;
 	}
@@ -346,6 +347,7 @@ bool GameMap::newUnit()
 
 	if (getUnitByXY(p.x, p.y) != nullptr)
 	{
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("noMoney.wav");
 		CCLOG("there is unit in base");
 		return false;
 	}
