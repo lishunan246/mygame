@@ -259,12 +259,22 @@ void GameMap::update(float delta)
 	for (int i = 0; i < GameHelper::col; i++)
 		for (int j = 0; j < GameHelper::row; j++)
 		{
-			if (GameHelper::getDistance(p, Point(i, j)) <= currentUnit->stamina)
+			int num = GameHelper::getDistance(p, Point(i, j));
+			if ((0<num)&&(num <= currentUnit->stamina))
 			{
-				Sprite *t = Sprite::create("ok.png");
-				t->setPosition(GameHelper::MapToScreen(Point(i, j)));
-				this->addChild(t);
-				oks.push_back(t);
+				Sprite *s;
+				if (num == 1)
+				{
+					s = Sprite::create("fight.png");
+				}
+				else
+				{
+					s = Sprite::create("ok.png");
+				}
+				 
+				s->setPosition(GameHelper::MapToScreen(Point(i, j)));
+				this->addChild(s);
+				oks.push_back(s);
 			}
 		}
 }
